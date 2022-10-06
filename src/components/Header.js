@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import colors from "../colors"
-const {LIGHT_GRAY, ORANGE} = colors;
+import constants from "../constants"
+const {LIGHT_GRAY, ORANGE} = constants;
 
 export default function Header() {
 

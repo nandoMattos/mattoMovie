@@ -1,21 +1,28 @@
-import { useEffect, useState } from "react"
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styled from "styled-components"
-import axios from "axios"
-import colors from "../colors"
-const {GRAY} = colors;
+import constants from "../constants"
+import { Link } from "react-router-dom";
+const {GRAY, URL} = constants;
 
 export default function ScreenMoviesList() {
-    const URL = "https://mock-api.driven.com.br/api/v8/cineflex"
-    const [movies, setMovies] = useState([])
-    
+
+    const [movies, setMovies] = useState([]);
+
     useEffect(()=>{
-        axios.get(`${URL}/movies`).then((res)=>{
-            setMovies(res.data)
-        });
+        axios.get(`${URL}/movies`)
+            .then((res)=>{
+                setMovies(res.data);
+            })
+            .catch((res)=>{
+                console.log(res.code);
+            }
+        );
     },[])
 
-    if(movies.length === 0) return <MainScreen>carregando..</MainScreen>
-    console.log(movies)
+    if(movies.length === 0) 
+        return <MainScreen>carregando..</MainScreen>
+    console.log(movies);
 
     return (
         <MainScreen>
@@ -24,9 +31,11 @@ export default function ScreenMoviesList() {
 
             <ul>
                 {movies.map((e)=>
-                    <li>
-                        <img src={e.posterURL} alt="Poster image"/>
-                    </li>
+                    <Link to={`/sessoes/${e.id}`}>
+                        <li key={e.id}>
+                            <img src={e.posterURL} alt="Poster"/>
+                        </li>
+                    </Link>
                 )}
             </ul>
         </MainScreen>
@@ -45,12 +54,10 @@ const MainScreen = styled.main`
         justify-content: space-around;
         flex-wrap: wrap;
         width: 80%;
-        /* background-color: lightcoral; */
     }
 
     li {
         padding: 0 10px;
-        /* border: 1px solid black; */
         border-radius: 3px;
         margin: 10px 0;
         box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);

@@ -7,6 +7,7 @@ import ScreenMovieSession from './ScreenMovieSession'
 import ScreenSuccess from './ScreenSuccess'
 
 export default function App() {
+
     return (
         <><GlobalStyle/>
             <Header/>
@@ -14,8 +15,8 @@ export default function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<ScreenMoviesList/>}/>
-                    <Route path='/filme' element={<ScreenMovieSchedule/>}/>
-                    <Route path='/sessao' element={<ScreenMovieSession/>}/>
+                    <Route path='/sessoes/:idFilme' element={<ScreenMovieSchedule/>}/>
+                    <Route path='/assentos/:idSessao' element={<ScreenMovieSession/>}/>
                     <Route path='/sucesso' element={<ScreenSuccess/>}/>
                 </Routes>
             </BrowserRouter>
