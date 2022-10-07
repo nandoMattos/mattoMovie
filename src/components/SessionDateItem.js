@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components"
 import constants from "../constants";
 const {ORANGE, GRAY} = constants;
@@ -5,16 +6,21 @@ const {ORANGE, GRAY} = constants;
 export default function SessionDateItem({movieSchedule}) {
     const {weekday, date, showtimes} = movieSchedule;
 
-    console.log(movieSchedule)
     return(
         <ContainerSchedule>
             <h1>{weekday} - {date}</h1>
 
+
             <ContainerTime>
                 {showtimes.map((e)=>
-                    <SpanTime>{e.name}</SpanTime>
+                    <Link to={`/assentos/${e.id}`}>
+                        <SpanTime>
+                                {e.name}
+                        </SpanTime>
+                    </Link>
                 )} 
             </ContainerTime>
+
         </ContainerSchedule>
     )
 };
@@ -27,6 +33,10 @@ const ContainerSchedule = styled.li`
     margin: 0 auto;
     margin: 15px 0 15px 30px;
     color: ${GRAY};
+
+    a{
+        text-decoration: none;
+    }
 
     h1 {
         margin-left: 10px;
@@ -44,11 +54,13 @@ const SpanTime = styled.div`
     font-size: 18px;
     background-color: ${ORANGE};
     border-radius: 3px;
-    margin: 10px;
+    /* margin: 10px; */
 `
 
 const ContainerTime = styled.div`
     display: flex;
     flex-wrap: wrap;
-
+    a{
+        background-color: lightblue;
+    }
 `

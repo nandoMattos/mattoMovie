@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import GlobalStyle from '../globalStyle'
 import Header from './Header'
-import ScreenMovieSchedule from './ScreenMovieSchedule'
-import ScreenMoviesList from './ScreenMoviesList'
-import ScreenMovieSession from './ScreenMovieSession'
-import ScreenSuccess from './ScreenSuccess'
+import ListMoviesPage from './ListMoviesPage'
+import ScheduleMoviePage from './ScheduleMoviePage'
+import SeatsMoviePage from './SeatsMoviePage'
+import ReservationSuccessedPage from './ReservationSuccessedPage'
 
 export default function App() {
 
@@ -14,10 +14,10 @@ export default function App() {
 
             <BrowserRouter>
                 <Routes>
-                    <Route path='/' element={<ScreenMoviesList/>}/>
-                    <Route path='/sessoes/:idFilme' element={<ScreenMovieSchedule/>}/>
-                    <Route path='/assentos/:idSessao' element={<ScreenMovieSession/>}/>
-                    <Route path='/sucesso' element={<ScreenSuccess/>}/>
+                    <Route path='/' element={<ListMoviesPage/>}/>
+                    <Route path='/sessoes/:idFilme' element={<ScheduleMoviePage/>}/>
+                    <Route path='/assentos/:idSessao' element={<SeatsMoviePage/>}/>
+                    <Route path='/sucesso' element={<ReservationSuccessedPage/>}/>
                 </Routes>
             </BrowserRouter>
         </>

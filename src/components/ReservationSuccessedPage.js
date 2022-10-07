@@ -1,4 +1,4 @@
-export default function ScreenSuccess() {
+export default function ReservationSuccessedPage() {
     return(
         <>
             sucess

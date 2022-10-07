@@ -5,27 +5,23 @@ import constants from "../constants"
 import { Link } from "react-router-dom";
 const {GRAY, URL} = constants;
 
-export default function ScreenMoviesList() {
+export default function ListMoviesPage() {
 
     const [movies, setMovies] = useState([]);
 
     useEffect(()=>{
         axios.get(`${URL}/movies`)
-            .then((res)=>{
-                setMovies(res.data);
-            })
-            .catch((res)=>{
-                console.log(res.code);
-            }
+            .then((res)=>setMovies(res.data))
+            .catch((res)=>console.log(res.code)
         );
     },[])
 
     if(movies.length === 0) 
-        return <MainScreen>carregando..</MainScreen>
+        return <HomeScreen>carregando..</HomeScreen>
     console.log(movies);
 
     return (
-        <MainScreen>
+        <HomeScreen>
 
             <HeaderH1>Selecione o filme</HeaderH1>
 
@@ -38,11 +34,11 @@ export default function ScreenMoviesList() {
                     </Link>
                 )}
             </ul>
-        </MainScreen>
+        </HomeScreen>
     )
 }
 
-const MainScreen = styled.main`
+const HomeScreen = styled.main`
     display: flex;
     flex-direction: column;
     justify-content: center;

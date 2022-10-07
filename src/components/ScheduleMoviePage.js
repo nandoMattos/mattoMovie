@@ -6,7 +6,7 @@ import constants from "../constants";
 import SessionDateItem from "./SessionDateItem";
 const {GRAY, URL} = constants
 
-export default function ScreenMovieSchedule() {
+export default function ScheduleMoviePage() {
     const {idFilme} = useParams();
     const [movieInfo, setmovieInfo] = useState({});
 
@@ -19,10 +19,10 @@ export default function ScreenMovieSchedule() {
     },[idFilme])
 
     if(Object.keys(movieInfo).length === 0) 
-        return <MainSchedule>carregando...</MainSchedule>
+        return <ScheduleList>carregando...</ScheduleList>
 
     return (
-        <MainSchedule>
+        <ScheduleList>
             <HeaderH1>Selecione o horário</HeaderH1>
 
             {movieInfo.days.map((days)=>
@@ -30,11 +30,11 @@ export default function ScreenMovieSchedule() {
                     <SessionDateItem movieSchedule={days}/>
                 </ul>
             )}
-        </MainSchedule>
+        </ScheduleList>
     )
 };
 
-const MainSchedule = styled.main`
+const ScheduleList = styled.main`
     display: flex;
     flex-direction: column;
     justify-content: center;
