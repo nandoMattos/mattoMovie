@@ -1,4 +1,4 @@
-export default function ReservationSuccessedPage() {
+export default function SuccessPage() {
     return(
         <>
             sucess

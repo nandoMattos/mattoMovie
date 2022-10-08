@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components"
-import constants from "../constants"
+import constants from "../../constants"
 import { Link } from "react-router-dom";
 const {GRAY, URL} = constants;
 
@@ -16,19 +16,18 @@ export default function ListMoviesPage() {
         );
     },[])
 
-    if(movies.length === 0) 
+    if(movies.length === 0) {
         return <HomeScreen>carregando..</HomeScreen>
-    console.log(movies);
+    }
 
     return (
         <HomeScreen>
-
-            <HeaderH1>Selecione o filme</HeaderH1>
+            <H1Container>Selecione o filme</H1Container>
 
             <ul>
                 {movies.map((e)=>
-                    <Link to={`/sessoes/${e.id}`}>
-                        <li key={e.id}>
+                    <Link to={`/sessoes/${e.id}`} key={e.id}>
+                        <li>
                             <img src={e.posterURL} alt="Poster"/>
                         </li>
                     </Link>
@@ -65,7 +64,7 @@ const HomeScreen = styled.main`
     }
 `
 
-const HeaderH1 = styled.header`
+const H1Container = styled.header`
     display: flex;
     align-items: center;
     justify-content: center;

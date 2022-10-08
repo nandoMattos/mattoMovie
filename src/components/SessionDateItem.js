@@ -13,11 +13,11 @@ export default function SessionDateItem({movieSchedule}) {
 
             <ContainerTime>
                 {showtimes.map((e)=>
-                    <Link to={`/assentos/${e.id}`}>
-                        <SpanTime>
-                                {e.name}
-                        </SpanTime>
-                    </Link>
+                    <DivTime key={e.id}>
+                        <Link to={`/assentos/${e.id}`}>
+                            <p >{e.name}</p>
+                        </Link>
+                    </DivTime>
                 )} 
             </ContainerTime>
 
@@ -43,8 +43,11 @@ const ContainerSchedule = styled.li`
         font-size: 20px;
     }
 `
-
-const SpanTime = styled.div`
+const ContainerTime = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`
+const DivTime = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,13 +57,14 @@ const SpanTime = styled.div`
     font-size: 18px;
     background-color: ${ORANGE};
     border-radius: 3px;
-    /* margin: 10px; */
-`
+    margin: 10px;
 
-const ContainerTime = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    a{
-        background-color: lightblue;
+    p{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 83px;
+        height: 43px;
+        border-radius: 3px;
     }
 `
