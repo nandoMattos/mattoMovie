@@ -1,30 +1,25 @@
 import styled from "styled-components"
 import constants from "../constants"
-const {GRAY, LIGHT_GRAY} = constants
+const {DARK_GRAY, LIGHT_GRAY} = constants
 
 export default function MovieFooter({ posterURL, title, day, name}) {
 
-    // in orther to reuse this component its necessary validade this
+    // in order to reuse this component its necessary validade this
     let weekday;
     if (day) {
         weekday = day.weekday
     }
+
     return(
         <FooterStyle>
-            <div>
+            <div data-identifier="movie-img-preview">
                 <img src={posterURL} alt="Poster"/>
             </div>
 
-            <p>
+            <p data-identifier="movie-and-session-infos-preview">
                 {title}
-                {(weekday && name) ?
-                <span>{weekday} - {name}</span>
-                :
-                ""}
-            </p>  
-            {
-            
-            }
+                {(weekday && name) && <span>{weekday} - {name}</span>}
+            </p> 
         </FooterStyle>
     )
 };
@@ -56,12 +51,12 @@ const FooterStyle = styled.footer`
     }
 
     p{
-        color: ${GRAY};
+        color: ${DARK_GRAY};
         font-size: 26px;
         margin-left: 20px;
         line-height: 30px;
         span{
-            display: inline-block;
+            display: block;
         }
     }
 `

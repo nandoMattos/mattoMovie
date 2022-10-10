@@ -2,10 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import styled from "styled-components";
-import constants from "../../constants"
-import FormContainer from "../FormSeat";
+import LoadingGif from "../LoadingGif";
 import MovieFooter from "../MovieFooter";
-const {LIGHT_GRAY, GRAY, GREEN, YELLOW, URL} = constants;
+import Seats from "../Seats";
+import SeatLegend from "../SeatLegend";
+import FormSeat from "../FormSeat";
+import constants from "../../constants";
+import GoBackButton from "../GoBackButton";
+const {URL, DARK_GRAY} = constants
  
 export default function ReserveSeatPage() {
     const {idSessao} = useParams();
@@ -16,72 +20,32 @@ export default function ReserveSeatPage() {
     useEffect(()=>{
         axios.get(`${URL}/showtimes/${idSessao}/seats`)
         .then((res)=>setSession(res.data))
-        .catch((res)=>console.log(res.code))
+        .catch((err)=>console.log(err.code))
     },[idSessao])
 
     if(Object.keys(session).length === 0 ){
-        return <SessionMain>carregando...</SessionMain>
-    }
-    console.log(session)
-
-    function toggleSelectSeat(seat) {
-        if(!seat.isAvailable) return alert("Esse assento não está disponível") 
-
-        if(selectedSeats.includes(seat.id)) {
-            setSelectedSeats(selectedSeats.filter((id)=> id != seat.id))
-        } else{
-            setSelectedSeats([...selectedSeats, seat.id])
-        }
-    }
-
-    function isSelected(idSeat) {
-        if(selectedSeats.includes(idSeat))
-            return GREEN
-        return LIGHT_GRAY
+        return <SessionMain><LoadingGif/></SessionMain>
     }
 
     return (
         <>
         <SessionMain>
 
-            <H1Container><h1>Selecione o(s) assento(s)</h1></H1Container>
+            <H1Container>
+                <GoBackButton/>
+                <h1>Selecione o(s) assento(s)</h1>
+            </H1Container>
 
             <SeatsContainer>
-                {session.seats.map((seat)=>
-                    <Seat 
-                        onClick={()=> toggleSelectSeat(seat)} 
-                        status={seat.isAvailable ? isSelected(seat.id) : YELLOW}
-                        // disabled={(!e.isAvailable)}
-                        key={seat.id}
-                    >
-                        {(seat.name)}
-                    </Seat>
-                )}
+                <Seats seats={session.seats} selectedSeats={selectedSeats} setSelectedSeats={setSelectedSeats}/>
+                <SeatLegend/>
+            </SeatsContainer>
 
-                
-                <SeatLegend>
-                    <div>
-                        <Seat status={GREEN}></Seat>
-                        Selecionado
-                    </div>
-
-                    <div>
-                        <Seat status={LIGHT_GRAY}></Seat>
-                        Disponível
-                    </div>
-
-                    <div>
-                        <Seat status={YELLOW}></Seat>
-                        Indisponível
-                    </div>
-                </SeatLegend>
-            </SeatsContainer>   
-
-            <FormContainer selectedSeats={selectedSeats}/>
+            <FormSeat session={session} selectedSeats={selectedSeats}/>
 
         </SessionMain>
 
-        <MovieFooter  
+        <MovieFooter
             name = {session.name}
             day ={session.day} 
             posterURL={session.movie.posterURL} 
@@ -92,19 +56,23 @@ export default function ReserveSeatPage() {
 };
 
 const SessionMain = styled.main`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-family:'Roboto', sans-serif;
-    color: ${GRAY};
+    color: ${DARK_GRAY};
     margin-bottom: 140px;
 `
 
 const H1Container = styled.div`
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    justify-content: space-around;
     width: 100%;
     height: 100px;
     font-size: 24px;
-    color: ${GRAY};
+    position: relative;
+    margin-bottom: 30px;
 `
 
 const SeatsContainer = styled.div`
@@ -113,32 +81,4 @@ const SeatsContainer = styled.div`
     flex-wrap: wrap;
     margin: 0 auto;
     width: 85%;
-`
-
-const Seat = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 26px;
-    height: 26px;
-    border-radius: 12px;
-    background-color: ${ ({status})=> status };
-    border: 1px solid ${ ({status})=> status };
-    margin: 10px;
-    font-size: 13px;
-    color:black;
-`
-
-const SeatLegend = styled.div`
-    display: flex;
-    justify-content: space-around;
-    /* background-color: lightcoral; */
-    width: 100%;
-    div{
-        margin-top: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
 `

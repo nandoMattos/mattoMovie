@@ -11,7 +11,6 @@ export default function App() {
     return (
         <><GlobalStyle/>
             <Header/>
-
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<ListMoviesPage/>}/>

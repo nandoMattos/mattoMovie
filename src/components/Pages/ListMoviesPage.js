@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components"
-import constants from "../../constants"
 import { Link } from "react-router-dom";
-const {GRAY, URL} = constants;
+import constants from "../../constants"
+import LoadingGif from "../LoadingGif";
+const {DARK_GRAY, URL} = constants;
 
 export default function ListMoviesPage() {
-
     const [movies, setMovies] = useState([]);
 
     useEffect(()=>{
@@ -17,7 +17,7 @@ export default function ListMoviesPage() {
     },[])
 
     if(movies.length === 0) {
-        return <HomeScreen>carregando..</HomeScreen>
+        return <HomeScreen><LoadingGif/></HomeScreen>
     }
 
     return (
@@ -27,7 +27,7 @@ export default function ListMoviesPage() {
             <ul>
                 {movies.map((e)=>
                     <Link to={`/sessoes/${e.id}`} key={e.id}>
-                        <li>
+                        <li data-identifier="movie-outdoor">
                             <img src={e.posterURL} alt="Poster"/>
                         </li>
                     </Link>
@@ -51,14 +51,14 @@ const HomeScreen = styled.main`
         width: 80%;
     }
 
-    li {
+    ul li {
         padding: 0 10px;
         border-radius: 3px;
         margin: 10px 0;
         box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
     }
 
-    img {
+    ul li img {
         width: 140px;
         margin: 15px 0;
     }
@@ -71,5 +71,5 @@ const H1Container = styled.header`
     width: 100%;
     height: 100px;
     font-size: 24px;
-    color: ${GRAY};
+    color: ${DARK_GRAY};
 `

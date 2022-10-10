@@ -1,26 +1,25 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components"
 import constants from "../constants";
-const {ORANGE, GRAY} = constants;
+const {ORANGE, DARK_GRAY} = constants;
 
 export default function SessionDateItem({movieSchedule}) {
     const {weekday, date, showtimes} = movieSchedule;
 
     return(
         <ContainerSchedule>
-            <h1>{weekday} - {date}</h1>
+            <h1 data-identifier="session-date">{weekday} - {date}</h1>
 
 
             <ContainerTime>
                 {showtimes.map((e)=>
                     <DivTime key={e.id}>
-                        <Link to={`/assentos/${e.id}`}>
-                            <p >{e.name}</p>
+                        <Link to={`/assentos/${e.id}`} data-identifier="hour-minute-btn">
+                            <p>{e.name}</p>
                         </Link>
                     </DivTime>
-                )} 
+                )}
             </ContainerTime>
-
         </ContainerSchedule>
     )
 };
@@ -32,7 +31,7 @@ const ContainerSchedule = styled.li`
     width: 90%;
     margin: 0 auto;
     margin: 15px 0 15px 30px;
-    color: ${GRAY};
+    color: ${DARK_GRAY};
 
     a{
         text-decoration: none;
