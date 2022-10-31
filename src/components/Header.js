@@ -6,7 +6,7 @@ export default function Header() {
 
     return(
         <HeaderStyle>
-            <h1>CINEFLEX</h1>
+            <h1>MATTOMOVIE</h1>
         </HeaderStyle>
     )
 };
