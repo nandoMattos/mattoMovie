@@ -46,6 +46,10 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+  @media (min-width:700px){
+    width: 60%;
+    margin: 0 auto;
+  }
 }
 ol, ul {
 	list-style: none;
@@ -62,5 +66,5 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-`
-export default GlobalStyle
+`;
+export default GlobalStyle;
