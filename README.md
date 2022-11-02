@@ -3,5 +3,3 @@
 Getting datas from an API, this mobile application simulates purchases of tickets from the movie cataloge.
 
 You check it out clicking <a href="https://mattomovie-pi.vercel.app" target="_blank">here</a>
-
-[here]().
